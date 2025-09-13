@@ -1,0 +1,239 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  user-select: none;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+
+  background-color: #0b1d3a;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+img {
+  width: 100%;
+  -webkit-user-drag: none;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  padding: 6px 10px;
+  background-color: transparent;
+  font-size: 1.2rem;
+}
+
+/* Styling Header */
+
+header {
+  width: 100%;
+  height: 90px;
+  margin-top: 20px;
+
+  border-bottom: 1px solid rgb(255, 255, 255, 0.7);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#logo-container {
+  width: 400px;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Styling Navigation */
+
+nav {
+  width: 90%;
+  height: 40px;
+  margin-top: 10px;
+
+  background-color: #00000060;
+  border-radius: 20px;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#timer-text {
+  width: 40%;
+  height: 100%;
+
+  line-height: 40px;
+  color: #fff6;
+
+  font-size: 1.5rem;
+  font-family: monospace;
+}
+
+#times {
+  width: 40%;
+  height: 100%;
+
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 22px;
+}
+
+#times button {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  font-family: monospace;
+  color: #fff4;
+}
+
+#times button .mobile-width {
+  display: none;
+}
+
+#times button:hover {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff7;
+}
+
+/* Styling Main */
+
+main {
+  width: 100%;
+  flex-grow: 0.4;
+  margin-top: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#test-container {
+  width: 70%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Styling Footer */
+
+.wavy-footer-top {
+  height: 160px;
+  width: 100%;
+  clip-path: polygon(
+    0% 10%,
+    /* Start of the wave */ 10% 15%,
+    20% 10%,
+    30% 15%,
+    40% 10%,
+    50% 15%,
+    60% 10%,
+    70% 15%,
+    80% 10%,
+    90% 15%,
+    100% 10%,
+    /* End of the wave */ 100% 100%,
+    /* Fill to bottom-right corner */ 0% 100% /* Fill to bottom-left corner */
+  );
+
+  position: absolute;
+  bottom: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #c2c7ce; /* Footer background color */
+  opacity: 1;
+
+
+background-image: radial-gradient(#0b1d3a 0.01500000000000001px, #e5e5f7 1.1500000000000001px);
+background-size: 20px 20px;
+}
+
+.footer-content {
+  padding-top: 50px; /* Adjust padding to clear the wave */
+  text-align: center;
+}
+
+/* Media Queries */
+
+/* For laptops and desktops (1440px)*/
+@media only screen and (max-width: 1600px) {
+  header {
+    height: 80px;
+  }
+  .wavy-footer-top {
+    height: 120px;
+  }
+}
+
+/* For tablets (1024px) */
+@media only screen and (max-width: 1024px) {
+  header {
+    height: 60px;
+  }
+  #logo-container {
+    width: 340px;
+  }
+  .wavy-footer-top {
+    height: 110px;
+  }
+  .footer-content {
+    padding-top: 20px;
+  }
+  #nav-bar {
+    width: 80%;
+    height: 30px;
+  }
+  #timer-text {
+    font-size: 1.3rem;
+    line-height: 30px;
+  }
+  #times {
+    gap: 12px;
+  }
+  #times button {
+    font-size: 1.1rem;
+  }
+}
+
+/* For mobile phones (600px) and height more than 700px */
+@media only screen and (max-width: 720px) and (min-height: 700px) {
+  header {
+    height: 50px;
+    margin-top: 30px;
+  }
+  #logo-container {
+    margin-bottom: 20px;
+  }
+  #times button .desktop-width {
+    display: none;
+  }
+  #times button .mobile-width {
+    display: inline;
+  }
+  .wavy-footer-top {
+    height: 160px;
+    clip-path: polygon(
+      0% 10%,
+      /* Start of the wave */ 25% 15%,
+      50% 10%,
+      75% 15%,
+      100% 10%,
+      /* End of the wave */ 100% 100%,
+      /* Fill to bottom-right corner */ 0% 100% /* Fill to bottom-left corner */
+    );
+  }
+}
