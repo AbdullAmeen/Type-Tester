@@ -22,15 +22,15 @@
             <p id="timer-text">Time</p>
 
             <div id="times">
-                  <button id="1min">
+                  <button class="time-btn" id="1min">
                         <span class="desktop-width">1 min</span>
                         <span class="mobile-width">1m</span>
                   </button>
-                  <button id="3min">
+                  <button class="time-btn" id="3min">
                         <span class="desktop-width">3 min</span>
                         <span class="mobile-width">3m</span>
                   </button>
-                  <button id="5min">
+                  <button class="time-btn" id="5min">
                         <span class="desktop-width">5 min</span>
                         <span class="mobile-width">5m</span>
                   </button>
@@ -38,21 +38,26 @@
       </nav>
 
       <main>
-            <div id="test-container">
-                  <div class="input-wrapper">
-                        <!-- <textarea id="test-input"></textarea> -->
+            <section id="left-section"></section>
+
+            <section id="main-section">
+                  <div id="game" tabindex="0">
+                        <div id="words"></div>
+                        <div id="cursor"></div>
+                        <div id="focus-error">Click here to focus</div>
                   </div>
-            </div>
+            </section>
+
+            <section id="right-section"></section>
+
       </main>
 
       <footer class="wavy-footer-top">
             <div class="footer-content">
-                  <!-- Your footer content here -->
             </div>
       </footer>
 
-
-      <script src="script.js"> </script>
+      <script src="script.js"></script>
 </body>
 
 </html>

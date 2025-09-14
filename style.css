@@ -6,11 +6,17 @@
   user-select: none;
 }
 
+:root {
+  --primary-color: #0b1d3a;
+  --secondary-color: #d9d9f8;
+  --font-color: #fff6;
+}
+
 body {
   width: 100vw;
   height: 100vh;
 
-  background-color: #0b1d3a;
+  background-color: var(--primary-color);
 
   display: flex;
   flex-direction: column;
@@ -74,7 +80,7 @@ nav {
   height: 100%;
 
   line-height: 40px;
-  color: #fff6;
+  color: var(--font-color);
 
   font-size: 1.5rem;
   font-family: monospace;
@@ -109,20 +115,90 @@ nav {
 
 main {
   width: 100%;
-  flex-grow: 0.4;
+  height: 600px;
   margin-top: 30px;
 
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-#test-container {
-  width: 70%;
-  height: 90%;
+#left-section {
+  height: 80%;
+  width: 20%;
+
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Styling the main section */
+
+#right-section {
+  height: 100%;
+  width: 20%;
+}
+
+#main-section {
+  height: 100%;
+  width: 60%;
+
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+}
+/* Styling the text field */
+
+#game {
+  width: 90%;
+  height: 175px;
+  margin-top: 30px;
+
+  color: #fff;
+  line-height: 35px;
+  overflow: hidden;
+  position: relative;
+
+  font-family: monospace;
+  font-size: 1.5rem;
+}
+#words {
+  filter: blur(5px);
+  color: #657288;
+}
+
+#game:focus #words {
+  filter: blur(0px);
+}
+#game:focus #focus-error {
+  display: none;
+}
+
+#focus-error {
+  position: absolute;
+  inset: 0;
+  text-align: center;
+  padding-top: 70px;
+  color: var(--secondary-color);
+}
+
+div.word {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.letter.correct {
+  color: #b6c5e0;
+}
+.letter.incorrect {
+  color: #f55;
+}
+
+/* Styling the cursor */
+
+#cursor {
+  width: 2px;
+  height: 1.6rem;
+  background-color: var(--secondary-color); /* temporary for visibility */
+  position: fixed;
+  top: 80px;
+  left: 40px;
 }
 
 /* Styling Footer */
@@ -157,9 +233,11 @@ main {
   background-color: #c2c7ce; /* Footer background color */
   opacity: 1;
 
-
-background-image: radial-gradient(#0b1d3a 0.01500000000000001px, #e5e5f7 1.1500000000000001px);
-background-size: 20px 20px;
+  background-image: radial-gradient(
+    #0b1d3a 0.01500000000000001px,
+    #d9d9f8 1.1500000000000001px
+  );
+  background-size: 20px 20px;
 }
 
 .footer-content {
@@ -207,10 +285,20 @@ background-size: 20px 20px;
   #times button {
     font-size: 1.1rem;
   }
+  #test-container {
+    width: 80%;
+    right: 0;
+  }
+  #main-section {
+    width: 80%;
+  }
+  #left-section {
+    display: none;
+  }
 }
 
 /* For mobile phones (600px) and height more than 700px */
-@media only screen and (max-width: 720px) and (min-height: 700px) {
+@media only screen and (max-width: 715px) and (min-height: 700px) {
   header {
     height: 50px;
     margin-top: 30px;
@@ -224,6 +312,17 @@ background-size: 20px 20px;
   #times button .mobile-width {
     display: inline;
   }
+  #test-container {
+    width: 80%;
+    right: 0;
+  }
+  #main-section {
+    width: 100%;
+  }
+  #left-section,
+  #right-section {
+    display: none;
+  }
   .wavy-footer-top {
     height: 160px;
     clip-path: polygon(
@@ -235,5 +334,28 @@ background-size: 20px 20px;
       /* End of the wave */ 100% 100%,
       /* Fill to bottom-right corner */ 0% 100% /* Fill to bottom-left corner */
     );
+  }
+}
+
+/* for max height for mobile */
+@media only screen and (max-height: 700px) and (max-width: 720px) {
+  #times button .desktop-width {
+    display: none;
+  }
+  #times button .mobile-width {
+    display: inline;
+  }
+  #main-section {
+    width: 100%;
+  }
+  #left-section,
+  #right-section {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  #timer-text{
+    display: none;
   }
 }
