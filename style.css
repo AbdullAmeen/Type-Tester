@@ -158,6 +158,9 @@ main {
   font-family: monospace;
   font-size: 1.5rem;
 }
+#game:focus {
+  outline: 0;
+}
 #words {
   filter: blur(5px);
   color: #657288;
@@ -191,14 +194,32 @@ div.word {
 }
 
 /* Styling the cursor */
+@keyframes blinks {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 
 #cursor {
+  display: none;
   width: 2px;
   height: 1.6rem;
   background-color: var(--secondary-color); /* temporary for visibility */
   position: fixed;
-  top: 80px;
-  left: 40px;
+  top: 184px;
+  left: 42px;
+
+  animation: blinks 0.3s infinite;
+}
+
+#game:focus #cursor {
+  display: block;
 }
 
 /* Styling Footer */

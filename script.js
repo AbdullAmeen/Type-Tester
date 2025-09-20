@@ -33,10 +33,38 @@ function newGame() {
 
 document.querySelector('#game').addEventListener("keypress", (e)=> {
       const key = e.key;
+      const currentWord= document.querySelector('.word.current');
       const currentLetter = document.querySelector('.letter.current');
       const expected = currentLetter.innerHTML;
+      const isLetter = key.length === 1 && key !== ' ';
+      const isSpace = key === ' ';
 
       console.log(key, expected);
+
+      if(isLetter) {
+        if (currentLetter) {
+          addClass(currentLetter, key === expected ? 'correct' : 'incorrect');
+          removeClass(currentLetter, 'current');
+          addClass(currentLetter.nextSibling, 'current')
+        }
+      }
+
+      if (isSpace) {
+         if (expected !== ' ') {
+          const letterToInvalidate = [...document.querySelectorAll('.word.current .letter:not(.correct)')];
+          letterToInvalidate.forEach(letter => {
+            letter.classList.add('incorrect');
+          })
+         }
+      }
+
+      removeClass(currentWord, 'current');
+      addClass(currentWord.nextSibling, 'current')
+
+      if (currentLetter) {
+        removeClass(currentLetter, 'current');
+      }
+      addClass(currentWord.nextSibling.firstChild, 'current');
       
 })
 
