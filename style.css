@@ -311,9 +311,10 @@ div.word {
     right: 0;
   }
   #main-section {
-    width: 80%;
+    width: 100%;
   }
-  #left-section {
+  #left-section,
+  #right-section {
     display: none;
   }
 }

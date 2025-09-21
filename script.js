@@ -35,9 +35,11 @@ document.querySelector('#game').addEventListener("keypress", (e)=> {
       const key = e.key;
       const currentWord= document.querySelector('.word.current');
       const currentLetter = document.querySelector('.letter.current');
-      const expected = currentLetter.innerHTML;
+      const expected = currentLetter?.innerHTML || ' ';
       const isLetter = key.length === 1 && key !== ' ';
       const isSpace = key === ' ';
+      const isbackspace = key === 'Backspace';
+      const isFirstLetter = currentLetter === currentWord.firstChild;
 
       console.log(key, expected);
 
@@ -45,7 +47,9 @@ document.querySelector('#game').addEventListener("keypress", (e)=> {
         if (currentLetter) {
           addClass(currentLetter, key === expected ? 'correct' : 'incorrect');
           removeClass(currentLetter, 'current');
-          addClass(currentLetter.nextSibling, 'current')
+          if(currentLetter.nextSibling) {
+            addClass(currentLetter.nextSibling, 'current')
+          }
         }
       }
 
@@ -55,17 +59,58 @@ document.querySelector('#game').addEventListener("keypress", (e)=> {
           letterToInvalidate.forEach(letter => {
             letter.classList.add('incorrect');
           })
+         } else {
+          const incorrectLetter = document.createElement('span');
+          incorrectLetter.innerHTML = key;
+          incorrectLetter.className = 'letter incorrect extra';
+          currentWord.appendChild(incorrectLetter);
          }
+
+         removeClass(currentWord, 'current');
+         addClass(currentWord.nextSibling, 'current')
+   
+         if (currentLetter) {
+           removeClass(currentLetter, 'current');
+         }
+         addClass(currentWord.nextSibling.firstChild, 'current');
       }
 
-      removeClass(currentWord, 'current');
-      addClass(currentWord.nextSibling, 'current')
+      if (isbackspace) {
+        if (currentLetter && isFirstLetter) {
+          //make priw word currnt, last letter current
+          removeClass(currentWord, 'current');
+          addClass(currentWord.previousSibling, 'current');
+          removeClass(currentLetter, 'current');
+          addClass(currentWord.previousSibling.lastChild, 'current');
+          removeClass(currentWord.previousSibling.lastChild, 'incorrect');
+          removeClass(currentWord.previousSibling.lastChild, 'correct');
+        }
+        if (currentLetter && !isFirstLetter) {
+          removeClass(currentLetter, 'current');
+          addClass(currentLetter.previousSibling, 'current');
+          removeClass(currentWord.previousSibling.lastChild, 'incorrect');
+          removeClass(currentWord.previousSibling.lastChild, 'correct');
+        }
+        if (!currentLetter) {
+          addClass(currentLetter.lastChild, 'current');
+          removeClass(currentWord.lastChild, 'incorrect');
+          removeClass(currentWord.lastChild, 'correct');
+        }
+      };
 
-      if (currentLetter) {
-        removeClass(currentLetter, 'current');
+      //move lines
+      if (currentWord.getBoundingClientRect().top > 250) {
+        const words = document.getElementById('words');
+        const margin = words.style.marginTop || '0px';
+        words.style.marginTop = '-35px';
       }
-      addClass(currentWord.nextSibling.firstChild, 'current');
-      
+
+      // move cursor
+      const nextLetter = document.querySelector('.letter.current');
+      const nextWord = document.querySelector('.word.current');
+      const cursor = document.querySelector('#cursor');
+      cursor.style.top = (nextLetter || nextWord).getBoundingClientRect().top + 2 +'px';
+      cursor.style.left = (nextLetter || nextWord).getBoundingClientRect()[nextLetter ? 'left' : 'right'] + 'px';
 })
 
 newGame();
