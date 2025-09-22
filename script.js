@@ -4,6 +4,8 @@ const words =
   );
 
 let wordsCount = words.length;
+const gameTime = 60 * 1000;  // 1 minute
+window.timer = null;
 
 function addClass(el, name){
       el.className += ' ' + name;
@@ -38,10 +40,15 @@ document.querySelector('#game').addEventListener("keypress", (e)=> {
       const expected = currentLetter?.innerHTML || ' ';
       const isLetter = key.length === 1 && key !== ' ';
       const isSpace = key === ' ';
-      const isbackspace = key === 'Backspace';
+      const isBackSpace = key === 'Backspace';
       const isFirstLetter = currentLetter === currentWord.firstChild;
 
       console.log(key, expected);
+
+      if (!window.timer && isLetter){
+        window.timer = setInterval(()=> {}, 1000);
+        alert('timer')
+      }
 
       if(isLetter) {
         if (currentLetter) {
@@ -75,7 +82,7 @@ document.querySelector('#game').addEventListener("keypress", (e)=> {
          addClass(currentWord.nextSibling.firstChild, 'current');
       }
 
-      if (isbackspace) {
+      if (isBackSpace) {
         if (currentLetter && isFirstLetter) {
           //make priw word currnt, last letter current
           removeClass(currentWord, 'current');
@@ -88,11 +95,11 @@ document.querySelector('#game').addEventListener("keypress", (e)=> {
         if (currentLetter && !isFirstLetter) {
           removeClass(currentLetter, 'current');
           addClass(currentLetter.previousSibling, 'current');
-          removeClass(currentWord.previousSibling.lastChild, 'incorrect');
-          removeClass(currentWord.previousSibling.lastChild, 'correct');
+          removeClass(currentWord.previousSibling, 'incorrect');
+          removeClass(currentWord.previousSibling, 'correct');
         }
         if (!currentLetter) {
-          addClass(currentLetter.lastChild, 'current');
+          addClass(currentWord.lastChild, 'current');
           removeClass(currentWord.lastChild, 'incorrect');
           removeClass(currentWord.lastChild, 'correct');
         }
@@ -101,8 +108,8 @@ document.querySelector('#game').addEventListener("keypress", (e)=> {
       //move lines
       if (currentWord.getBoundingClientRect().top > 250) {
         const words = document.getElementById('words');
-        const margin = words.style.marginTop || '0px';
-        words.style.marginTop = '-35px';
+        const margin = parseInt(words.style.marginTop || '0px');
+        words.style.marginTop = (margin - 35) + 'px';
       }
 
       // move cursor
