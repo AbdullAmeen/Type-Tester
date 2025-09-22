@@ -75,7 +75,7 @@ nav {
   align-items: center;
 }
 
-#timer-text {
+#info {
   width: 40%;
   height: 100%;
 
@@ -221,6 +221,16 @@ div.word {
 #game:focus #cursor {
   display: block;
 }
+#game.over #words{
+  opacity: .5;
+  filter: blur(0);
+}
+#game.over:focus #cursor{
+  display: none;
+}
+#game.over #focus-error{
+  display: none;
+}
 
 /* Styling Footer */
 
@@ -296,7 +306,7 @@ div.word {
     width: 80%;
     height: 30px;
   }
-  #timer-text {
+  #info {
     font-size: 1.3rem;
     line-height: 30px;
   }
@@ -372,12 +382,6 @@ div.word {
   }
   #left-section,
   #right-section {
-    display: none;
-  }
-}
-
-@media only screen and (max-width: 320px) {
-  #timer-text{
     display: none;
   }
 }
